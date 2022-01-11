@@ -4,7 +4,7 @@ trade_date = input("Please input the report date [format=YYYYMMDD]: ") or dt.dat
 trade_year = trade_date[0:4]
 
 while True:
-    u_disk_sign = input("Please input the U-Disk sign [Default is 'H']: ").upper() or "H"
+    u_disk_sign = input("Please input the U-Disk sign [Default is 'G']: ").upper() or "G"
     src_dir = os.path.join("{}:\\".format(u_disk_sign), "报表", trade_date[0:4])
     if not os.path.exists(src_dir):
         print("| {} | Error | {} | does not exist, please check again |".format(dt.datetime.now(), src_dir))
