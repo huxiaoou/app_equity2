@@ -46,7 +46,6 @@ def print_sum(t_df: pd.DataFrame, t_trade_date: str):
     print("|   资金帐号 | 买入数量(千股[张]) | 买入金额(万元) | 卖出数量(千股[张]) | 卖出金额(万元) |")
     print("| {:>10s} | {:>18.2f} | {:>14.2f} | {:>18.2f} | {:>14.2f} |".format(
         "--", b_qty_sum / 1e3, b_amt_sum / 1e4, s_qty_sum / 1e3, s_amt_sum / 1e4))
-    print("=" * 120)
     return 0
 
 
@@ -90,7 +89,7 @@ by_security_df = pd.pivot_table(
     values=["成交数量", "成交金额"],
     aggfunc=sum
 ).fillna(0)
-
+cb_by_security_df = by_security_df.loc[("1003000010",):]
 by_account_df = pd.pivot_table(
     data=src_df,
     index=["资金帐号"],
@@ -102,3 +101,5 @@ by_account_df = pd.pivot_table(
 print_by_security(t_df=by_security_df, t_trade_date=trade_date)
 print_by_account(t_df=by_account_df, t_trade_date=trade_date)
 print_sum(t_df=by_account_df, t_trade_date=trade_date)
+print_by_security(t_df=cb_by_security_df, t_trade_date=trade_date)
+print("=" * 120)
